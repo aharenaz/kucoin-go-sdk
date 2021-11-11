@@ -275,6 +275,7 @@ func (wc *WebSocketClient) read() {
 				wc.acks <- m.Id
 			case ErrorMessage:
 				wc.errors <- errors.Errorf("Error message: %s", ToJsonString(m))
+				wc.acks <- m.Id
 			case Message, Notice, Command:
 				wc.messages <- m
 			default:
