@@ -341,7 +341,6 @@ func (wc *WebSocketClient) Subscribe(channels ...*WebSocketSubscribeMessage) err
 				return errors.Errorf("Invalid ack id %s, expect %s", id, c.Id)
 			}
 		case err := <-wc.errors:
-			<-wc.acks
 			return errors.Errorf("Subscribe failed, %s", err.Error())
 		case <-time.After(wc.timeout):
 			return errors.Errorf("Wait ack message timeout in %v", wc.timeout)
